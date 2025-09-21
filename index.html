@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Lindo Detalle Para Ti 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5d4e75;
+        }
+
+        .container {
+            text-align: center;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #d63384;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: #6c5ce7;
+            font-style: italic;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .heart-container {
+            margin: 40px 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .emoji-heart {
+            font-size: 8rem;
+            animation: heartBeat 1.5s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .emoji-heart:hover {
+            transform: scale(1.2);
+        }
+
+        .sweet-message {
+            font-size: 1.1rem;
+            color: #8e44ad;
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: #ff69b4;
+            animation: floatUp 4s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.05);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            75% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .message {
+                font-size: 1.1rem;
+            }
+
+            .emoji-heart {
+                font-size: 6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Un Lindo Detalle 💕</h1>
+        
+        <div class="message">
+            Sé que llevamos poco tiempo hablando, pero quería tener un detallito contigo...
+        </div>
+
+        <div class="heart-container">
+            <div class="emoji-heart">💓</div>
+        </div>
+    </div>
+
+    <div class="floating-hearts"></div>
+
+    <script>
+        // Crear corazones flotantes
+        function createFloatingHeart() {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            
+            heartsContainer.appendChild(heart);
+            
+            // Remover el corazón después de la animación
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Crear corazones flotantes cada cierto tiempo
+        setInterval(createFloatingHeart, 1500);
+
+        // Efecto al hacer click en el emoji corazón
+        document.querySelector('.emoji-heart').addEventListener('click', function() {
+            // Crear múltiples corazones al hacer click
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => createFloatingHeart(), i * 100);
+            }
+        });
+
+        // Inicializar algunos corazones al cargar
+        window.addEventListener('load', () => {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => createFloatingHeart(), i * 300);
+            }
+        });
+    </script>
+</body>
+</html>
